@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Reaction Tester</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+      <section class="title-section">
+        <p class="title">Your Reaction Tester!!<p>
+        <h2>A JavaSript Program to find out the time(in sec) taken to find out the shape</h2>
+      </section>
+      <section class="answer">
+        <h3>Time Taken :<span id="answer" class="blinking"></span></h3>
+      </section>
+      <section class="play-area">
+        <div class="red shape" id="image"><strong>Catch me if you can</strong></div>
+      </section>
+        <script>
+            var start = new Date().getTime();
+            //fuction to get a random color
+            function getRandomColor(){
+                var letters='0123456789ABCDEF'.split('');
+                var color='#';
+                for(var i=0;i<6;i++){
+                    //console.log(Math.floor(Math.random()*16));
+                    color+=letters[Math.floor(Math.random()*16)];
+                }
+                return color;
+            }
+            //Make  the shape Appear after random delay at random place with random color
+            function makeShapeAppear(){
+                var top=Math.random()*300;
+                var left=Math.random()*1100;
+                var width=(Math.random()*100)+100;
+                if(Math.random()>0.5){
+                    document.getElementById("image").style.borderRadius="50%";
+                }
+                else{
+                    document.getElementById("image").style.borderRadius="0";
+                }
+                document.getElementById("image").style.backgroundColor=getRandomColor();
+                document.getElementById("image").style.height=width+"px";
+                document.getElementById("image").style.width=width+"px";
+                document.getElementById("image").style.top=top+"px";
+                document.getElementById("image").style.left=left+"px";
+                document.getElementById("image").style.display="block";
+                start = new Date().getTime();
+            }
+            function appearAfterDelay(){
+                setTimeout(makeShapeAppear,Math.random()*2000);
+            }
+            var time="";
+            document.getElementById("image").onclick=function disappear(){
+                document.getElementById("image").style.display="none";
+                var end = new Date().getTime();
+                time = (end - start)/1000;
+                document.getElementById("answer").innerHTML=time+" s";
+                appearAfterDelay();
+            }
+        </script>
+    </body>
+</html>
